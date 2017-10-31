@@ -4,7 +4,7 @@ import Book from '../book/Book'
 class CurrentRead extends React.Component{
 
     render(){
-        const {books} = this.props;
+        const {books,update} = this.props;
         return(
             <div className="bookshelf">
                 <h2 className="bookshelf-title">Currently Reading</h2>
@@ -12,7 +12,7 @@ class CurrentRead extends React.Component{
                     <ol className="books-grid">
                         {books.map((book)=>(
                             <li key={book.id}>
-                                <Book info={book}/>
+                                <Book info={book} update={update}/>
                             </li>
                         ))}
 

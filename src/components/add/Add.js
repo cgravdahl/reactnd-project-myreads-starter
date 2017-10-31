@@ -21,7 +21,7 @@ class Add extends React.Component{
                     <ol className="books-grid">
                         {this.state.searchResults.length ? this.state.searchResults.map((book)=>(
                             <li key={book.id}>
-                                <Book info={book}/>
+                                <Book info={book} update={this.props.updateShelf}/>
                             </li>
                         )) : <li>No Results Found</li>}
                     </ol>

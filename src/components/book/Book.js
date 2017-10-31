@@ -1,11 +1,16 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
+import * as BooksAPI from '../../BooksAPI'
 
 class Book extends React.Component {
 
+    updateShelf = (e)=>{
+       this.props.update(this.props.info,e.target.value)
+    };
 
     render() {
-        const {info} = this.props;
+        console.log(this.props)
+        const {info,update} = this.props;
         const {description,authors} = info;
         let trimmedDesc;
         let descriptLength = 250;
@@ -14,8 +19,6 @@ class Book extends React.Component {
                 description.substring(0, descriptLength - 3) + "..." :
                 description;
         }
-        if(!description)
-        console.log(info);
         return (
             <div className="book">
                 <div className="book-top">
@@ -43,7 +46,7 @@ class Book extends React.Component {
                         </ul>
                     </ReactTooltip>
                     <div className="book-shelf-changer">
-                        <select>
+                        <select value={info.shelf ? info.shelf : "none"} onChange={this.updateShelf}>
                             <option value="none" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
