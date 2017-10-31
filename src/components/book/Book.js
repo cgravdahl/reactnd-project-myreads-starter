@@ -6,17 +6,23 @@ class Book extends React.Component {
 
     render() {
         const {info} = this.props;
+        const {description,authors} = info;
+        let trimmedDesc;
         let descriptLength = 250;
-        let trimmedDesc = info.description.length > descriptLength ?
-            info.description.substring(0, descriptLength - 3) + "..." :
-            info.description;
+        if(info.description) {
+            trimmedDesc = description.length > descriptLength ?
+                description.substring(0, descriptLength - 3) + "..." :
+                description;
+        }
+        if(!description)
         console.log(info);
         return (
             <div className="book">
                 <div className="book-top">
                     <div data-tip data-for={info.id} className="book-cover" style={{
                         width: 128, height: 193,
-                        backgroundImage: `url(${info.imageLinks.thumbnail})`
+                        backgroundImage: `url(${info.imageLinks ? info.imageLinks.thumbnail
+                            : ''})`
                     }}></div>
                     <ReactTooltip id={info.id} class='hoverClass' delayHide={150}
                                   effect='solid' aria-haspopup='true'
@@ -30,9 +36,9 @@ class Book extends React.Component {
                             <li>Page Count: {info.pageCount}</li>
                             <li>Authors:</li>
                             <ul>
-                                {info.authors.map((author) => (
+                                {info.authors ? authors.map((author) => (
                                     <li key={author}>{author}</li>
-                                ))}
+                                )) : []}
                             </ul>
                         </ul>
                     </ReactTooltip>
@@ -47,9 +53,9 @@ class Book extends React.Component {
                     </div>
                 </div>
                 <div className="book-title">{info.title}</div>
-                {info.authors.map((author) => (
+                {info.authors ? authors.map((author) => (
                     <div key={author} className="book-authors">{author}</div>
-                ))}
+                )) : []}
 
             </div>
         )

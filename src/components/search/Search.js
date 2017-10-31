@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import * as BooksAPI from '../../BooksAPI'
 
 class Search extends React.Component {
 
@@ -8,7 +9,11 @@ class Search extends React.Component {
     };
 
     updateSearch = (term) => {
-      this.setState({term: term.trim()})
+      this.setState({searchTerms: term.trim()})
+        console.log(term)
+        BooksAPI.search(this.state.searchTerms, 20).then((books) => {
+            this.props.onSearch(books)
+    });
     };
 
     clearSearch = () => {
@@ -31,7 +36,7 @@ class Search extends React.Component {
                 */}
                     <input type="text" placeholder="Search by title or author"
                         value={terms}
-                           onChange={(event) => this.updateSearch(event.target.value())}
+                           onChange={(event) => this.updateSearch(event.target.value)}
                     />
 
                 </div>

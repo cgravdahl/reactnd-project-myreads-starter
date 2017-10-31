@@ -25,9 +25,6 @@ class BooksApp extends React.Component {
     }
 
     render() {
-        BooksAPI.search('Android', 20).then((books) => {
-            console.log(books)
-        });
 
         return (
             <div className="app">
