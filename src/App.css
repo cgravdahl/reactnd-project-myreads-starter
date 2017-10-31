@@ -172,3 +172,19 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+/*Tooltip*/
+.hoverClass {
+  pointer-events: auto !important;
+  width: 25%;
+}
+.hoverClass a{
+  color: #fff
+}
+.hoverClass a:hover{
+  color: #008000;
+}
+.hoverClass:hover {
+   visibility: visible !important;
+   opacity: 1 !important;
+ }
