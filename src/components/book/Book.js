@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
-import * as BooksAPI from '../../BooksAPI'
 
 class Book extends React.Component {
 
@@ -10,7 +9,7 @@ class Book extends React.Component {
 
     render() {
         console.log(this.props)
-        const {info,update} = this.props;
+        const {info} = this.props;
         const {description,authors} = info;
         let trimmedDesc;
         let descriptLength = 250;

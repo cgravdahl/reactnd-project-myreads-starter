@@ -2,46 +2,37 @@ import React from 'react'
 import {Route, Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Add from './components/add/Add'
-import WantRead from './components/wantRead/WantRead'
-import CurrentRead from './components/currentRead/CurrentRead'
-import Read from './components/read/Read'
+import Shelf from './components/shelf/Shelf'
 import './App.css'
 
 class BooksApp extends React.Component {
     state = {
-        currentBooks: [],
-        wantBooks: [],
-        readBooks: []
+        books: []
     };
 
     componentDidMount() {
-        console.log(this)
         BooksAPI.getAll().then((book) => {
             this.setState((state) => {
-                state.currentBooks = book.filter(x => x.shelf === 'currentlyReading');
-                state.wantBooks = book.filter(x => x.shelf === 'wantToRead');
-                state.readBooks = book.filter(x => x.shelf === 'read');
+                state.books = book
             });
-            console.log(this.state)
         })
     }
 
     updateShelf(book,shelf){
-        console.log(book,this)
         BooksAPI.update(book,shelf).then(() => {
             BooksAPI.getAll().then((book) => {
                 this.setState((state) => {
-                    state.currentBooks = book.filter(x => x.shelf === 'currentlyReading');
-                    state.wantBooks = book.filter(x => x.shelf === 'wantToRead');
-                    state.readBooks = book.filter(x => x.shelf === 'read');
+                    state.books = book
                 });
-                console.log(this.state)
             })
         })
     }
 
     render() {
         this.updateShelf = this.updateShelf.bind(this);
+        const {books} = this.state;
+        const filter = books => shelf => books.filter(b => b.shelf === shelf);
+        const filterBooksBy = filter(books);
         return (
             <div className="app">
                 <Route exact path='/' render={() => (
@@ -52,17 +43,29 @@ class BooksApp extends React.Component {
                         </div>
                         <div className="list-books-content">
                             <div>
-                                <CurrentRead books={this.state.currentBooks} update={this.updateShelf}/>
-                                <WantRead books={this.state.wantBooks} update={this.updateShelf}/>
-                                <Read books={this.state.readBooks} update={this.updateShelf}/>
+                                <Shelf
+                                    title='Currently Reading'
+                                    update={this.updateShelf}
+                                    books={filterBooksBy('currentlyReading')}
+                                />
+                                <Shelf
+                                    title='Want to Read'
+                                    update={this.updateShelf}
+                                    books={filterBooksBy('wantToRead')}
+                                />
+                                <Shelf
+                                    title='Read'
+                                    update={this.updateShelf}
+                                    books={filterBooksBy('read')}
+                                />
                             </div>
                         </div>
                         <div className="open-search">
-                            <Link to='/add'>Add a book</Link>
+                            <Link to='/search'>Add a book</Link>
                         </div>
                     </div>
                 )}/>
-                <Route path='/add' render={({history}) => (
+                <Route path='/search' render={({history}) => (
                     <Add
                         updateShelf={(book,shelf)=>{
                             this.updateShelf(book,shelf)
