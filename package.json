@@ -5,10 +5,17 @@
     "react-dom": "^15.5.4",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-throttle": "^0.3.0",
     "react-tooltip": "^3.4.0"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "babel-jest": "^21.2.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^21.2.1",
+    "react-scripts": "0.9.5",
+    "react-test-renderer": "^16.2.0",
+    "regenerator-runtime": "^0.11.0"
   },
   "scripts": {
     "start": "react-scripts start",

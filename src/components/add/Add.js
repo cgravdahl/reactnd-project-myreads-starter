@@ -10,13 +10,12 @@ class Add extends React.Component{
 
     returnResults = (results) =>{
         if(results) this.setState({searchResults: results})
-        console.log(this.state)
     };
 
     render(){
         return(
             <div className="search-books">
-                <Search onSearch={this.returnResults}/>
+                <Search userBooks={this.props.book} onSearch={this.returnResults}/>
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {this.state.searchResults.length ? this.state.searchResults.map((book)=>(
