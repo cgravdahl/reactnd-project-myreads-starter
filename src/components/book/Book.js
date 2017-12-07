@@ -4,7 +4,8 @@ import ReactTooltip from 'react-tooltip'
 const Book = (props) => {
 
     let updateShelf = (e) => {
-        props.update(props.info, e.target.value)
+        props.update(props.info, e.target.value);
+        info.shelf = e.target.value;
     };
 
     const {info} = props;

@@ -70,7 +70,6 @@ class BooksApp extends React.Component {
                         book={books}
                         updateShelf={(book,shelf)=>{
                             this.updateShelf(book,shelf)
-                            history.push('/')
                         }}
                     />
                 )}/>

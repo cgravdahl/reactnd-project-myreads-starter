@@ -21,7 +21,6 @@ class Search extends React.Component {
                     }
                     return x
                 });
-                console.log(matchedBooks)
                 this.props.onSearch(matchedBooks)
             }else{
                 this.props.onSearch(books = [])
